@@ -8,15 +8,6 @@ import FilterPanel from './components/FilterPanel';
 import MembersGrid from './components/MembersGrid';
 import membersList from './data/legislators-current.json';
 
-// console.clear();
-// console.log(membersList[0].id.bioguide);
-// console.log(membersList[0].name.official_full);
-// console.log(membersList[0].bio.birthday);
-// console.log(membersList[0].terms.at(-1).start);
-// console.log(membersList[0].terms.at(-1).end);
-// console.log(membersList[0].terms.at(-1).state);
-// console.log(membersList[0].terms.at(-1).party);
-
 function App() {
   const [isFilterVisible, setIsFilterVisible] = useState(false);
 

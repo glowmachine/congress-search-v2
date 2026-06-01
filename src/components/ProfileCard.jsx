@@ -94,34 +94,34 @@ function getAge(bDayString) {
 
 export default function ProfileCard({ member }) {
     const [expanded, setExpanded] = useState(false);
+    const current = member.terms.at(-1);
 
     return (
-        <article className={`bg-cyan-800 rounded border-b-10 p-1 flex flex-col gap-1 ${accentColor[member.terms.at(-1).party] ?? 'border-black'} ${expanded ? 'row-span-2' : ''}`}>
+        <article className={`bg-cyan-800 rounded border-b-10 p-1 flex flex-col gap-1 ${accentColor[current.party] ?? 'border-black'} ${expanded ? 'row-span-2' : ''}`}>
             <div className='flex'>
                 <img src='.png' alt={`portrait of ${member.name.first} ${member.name.last}`} className='bg-zinc-100 aspect-1/1 h-33 object-cover' />
                 <div className='flex-1 flex flex-col px-1'>
                     <h1 className='mb-1'>{member.name.first} {member.name.last}, {getAge(member.bio.birthday)}</h1>
-                    <h2>{fullTitle[member.terms.at(-1).type]} ({partyAbbr[member.terms.at(-1).party]})</h2>
-                    <h2>{fullStateName[member.terms.at(-1).state]}</h2>
+                    <h2>{fullTitle[current.type]} ({partyAbbr[current.party]})</h2>
+                    <h2>{fullStateName[current.state]}</h2>
                     <button
                         className='mt-auto ml-auto border rounded hover:bg-cyan-500 hover:bg-cyan-500 px-1'
                         onClick={() => setExpanded(prev => !prev)}>Expand</button>
                 </div>
             </div>
             <div className={`flex-1 mt-1 border-t-1 border-cyan-500 flex flex-col justify-between ${expanded ? 'block' : 'hidden'}`}>
-                <h2>{member.terms.at(-1).district ? `District ${member.terms.at(-1).district}` : ''}</h2>
-                <h2>Current term: {member.terms.at(-1).start.slice(0, 4)}-{member.terms.at(-1).end.slice(0, 4)}</h2>
+                <h2>{current.district ? `District ${current.district}` : ''}</h2>
+                <h2>Current term: {current.start.slice(0, 4)}-{current.end.slice(0, 4)}</h2>
                 <div className='mt-auto ml-auto text-3xl sm:text-xl flex justify-end gap-2 border-t-1 border-l-1 p-1'>
-                    <MdLink className='hover:text-cyan-500' />
-                    <MdPhone className='hover:text-cyan-500' />
-                    <MdEmail className='hover:text-cyan-500' />
-                    <FaFacebook className='hover:text-cyan-500' />
-                    <FaYoutube className='hover:text-cyan-500' />
-                    <FaTwitter className='hover:text-cyan-500' />
-                    <FaInstagram className='hover:text-cyan-500' />
-                    <FaTiktok className='hover:text-cyan-500' />
+                    <a href={current.url} target='_blank' rel='noopener noreferrer'>
+                        <MdLink className='hover:text-cyan-500' /></a>
+                    <a href={`tel:+1-${current.phone}`}>
+                        <MdPhone className='hover:text-cyan-500' /></a>
+                    <a href={current.contact_form} target='_blank' rel='noopener noreferrer'>
+                        <MdEmail className='hover:text-cyan-500' />
+                    </a>
                 </div>
             </div>
-        </article>
+        </article >
     )
 }
