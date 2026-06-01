@@ -5,10 +5,17 @@ import { MdLink, MdPhone, MdEmail } from 'react-icons/md'
 import Header from './components/Header';
 import Footer from './components/Footer';
 import FilterPanel from './components/FilterPanel';
-import ProfileCard from './components/ProfileCard';
+import MembersGrid from './components/MembersGrid';
+import membersList from './data/legislators-current.json';
 
-const card = 'bg-cyan-800 rounded border-b-10 p-1 flex flex-col gap-1';
-const selected = 'row-span-2';
+// console.clear();
+// console.log(membersList[0].id.bioguide);
+// console.log(membersList[0].name.official_full);
+// console.log(membersList[0].bio.birthday);
+// console.log(membersList[0].terms.at(-1).start);
+// console.log(membersList[0].terms.at(-1).end);
+// console.log(membersList[0].terms.at(-1).state);
+// console.log(membersList[0].terms.at(-1).party);
 
 function App() {
   const [isFilterVisible, setIsFilterVisible] = useState(false);
@@ -19,35 +26,7 @@ function App() {
 
       <div className='bg-pink-300 flex-1 flex flex-col sm:flex-row sm:overflow-hidden'>
         <FilterPanel isFilterVisible={isFilterVisible} setIsFilterVisible={setIsFilterVisible} />
-
-
-        <main className='text-zinc-100 w-full p-1 grid grid-cols-[repeat(auto-fit,minmax(20rem,1fr))] gap-1 content-start overflow-y-auto'>
-
-          <ProfileCard
-            name='Jane Doe, 34'
-            role='Representative'
-            party='democrat'
-            state='U.S. Virgin Islands'
-            expanded={false} />
-          <ProfileCard
-            name='Jane Doe, 34'
-            role='Representative'
-            party='democrat'
-            state='U.S. Virgin Islands'
-            expanded={true} />
-          <ProfileCard
-            name='Jane Doe, 34'
-            role='Representative'
-            party='democrat'
-            state='U.S. Virgin Islands'
-            expanded={false} />
-          <ProfileCard
-            name='Jane Doe, 34'
-            role='Representative'
-            party='democrat'
-            state='U.S. Virgin Islands'
-            expanded={false} />
-        </main>
+        <MembersGrid membersList={membersList} />
       </div>
 
       <Footer />
