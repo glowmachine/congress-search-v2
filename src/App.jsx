@@ -1,7 +1,9 @@
 import { useState } from 'react'
-import { FaFilter, FaFacebook, FaYoutube, FaTwitter, FaInstagram, FaTiktok } from 'react-icons/fa'
+import { FaFacebook, FaYoutube, FaTwitter, FaInstagram, FaTiktok } from 'react-icons/fa'
 import { FaArrowRotateLeft } from 'react-icons/fa6';
 import { MdLink, MdPhone, MdEmail } from 'react-icons/md'
+import Header from './components/Header';
+import Footer from './components/Footer';
 import FilterPanel from './components/FilterPanel';
 import ProfileCard from './components/ProfileCard';
 
@@ -13,14 +15,7 @@ function App() {
 
   return (
     <div className='h-screen flex flex-col'>
-      <header className='bg-blue-900 text-white px-2 py-1 flex items-center justify-between'>
-        <h1 className='text-2xl'>🇺🇸 US Congress Search</h1>
-        <button
-          className='border rounded sm:hidden p-1 ml-1'
-          onClick={() => setIsFilterVisible(prev => !prev)}
-        ><FaFilter />
-        </button>
-      </header>
+      <Header setIsFilterVisible={setIsFilterVisible} />
 
       <div className='bg-pink-300 flex-1 flex flex-col sm:flex-row sm:overflow-hidden'>
         <FilterPanel isFilterVisible={isFilterVisible} setIsFilterVisible={setIsFilterVisible} />
@@ -54,9 +49,8 @@ function App() {
             expanded={false} />
         </main>
       </div>
-      <footer className='flex justify-center bg-red-900 text-white text-xs'>
-        <span>&copy; {new Date().getFullYear()} Michael Wong</span>
-      </footer>
+
+      <Footer />
     </div>
   )
 }
