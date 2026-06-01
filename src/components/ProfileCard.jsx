@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { FaFilter, FaFacebook, FaYoutube, FaTwitter, FaInstagram, FaTiktok, FaWikipediaW } from 'react-icons/fa'
 import { FaArrowRotateLeft } from 'react-icons/fa6';
 import { MdLink, MdPhone, MdEmail } from 'react-icons/md'
+import { states, territories, dc } from '../utils/stateUtils'
 
 const accentColor = {
     Democrat: 'border-blue-700',
@@ -13,67 +14,6 @@ const partyAbbr = {
     Republican: 'R',
     Independent: 'I',
 }
-const fullStateName = {
-    AL: "Alabama",
-    AK: "Alaska",
-    AZ: "Arizona",
-    AR: "Arkansas",
-    CA: "California",
-    CO: "Colorado",
-    CT: "Connecticut",
-    DE: "Delaware",
-    FL: "Florida",
-    GA: "Georgia",
-    HI: "Hawaii",
-    ID: "Idaho",
-    IL: "Illinois",
-    IN: "Indiana",
-    IA: "Iowa",
-    KS: "Kansas",
-    KY: "Kentucky",
-    LA: "Louisiana",
-    ME: "Maine",
-    MD: "Maryland",
-    MA: "Massachusetts",
-    MI: "Michigan",
-    MN: "Minnesota",
-    MS: "Mississippi",
-    MO: "Missouri",
-    MT: "Montana",
-    NE: "Nebraska",
-    NV: "Nevada",
-    NH: "New Hampshire",
-    NJ: "New Jersey",
-    NM: "New Mexico",
-    NY: "New York",
-    NC: "North Carolina",
-    ND: "North Dakota",
-    OH: "Ohio",
-    OK: "Oklahoma",
-    OR: "Oregon",
-    PA: "Pennsylvania",
-    RI: "Rhode Island",
-    SC: "South Carolina",
-    SD: "South Dakota",
-    TN: "Tennessee",
-    TX: "Texas",
-    UT: "Utah",
-    VT: "Vermont",
-    VA: "Virginia",
-    WA: "Washington",
-    WV: "West Virginia",
-    WI: "Wisconsin",
-    WY: "Wyoming",
-
-    // U.S. territories
-    AS: "American Samoa",
-    GU: "Guam",
-    MP: "Northern Mariana Islands",
-    PR: "Puerto Rico",
-    VI: "U.S. Virgin Islands",
-
-    DC: "District of Columbia",
-};
 const fullTitle = {
     sen: 'Senator',
     rep: 'Representative'
@@ -103,7 +43,7 @@ export default function ProfileCard({ member }) {
                 <div className='flex-1 flex flex-col px-1'>
                     <h1 className='mb-1'>{member.name.first} {member.name.last}, {getAge(member.bio.birthday)}</h1>
                     <h2>{fullTitle[current.type]} ({partyAbbr[current.party]})</h2>
-                    <h2>{fullStateName[current.state]}</h2>
+                    <h2>{{ ...states, ...territories, ...dc }[current.state].name}</h2>
                     <button
                         className='mt-auto ml-auto border rounded hover:bg-cyan-500 hover:bg-cyan-500 px-1'
                         onClick={() => setExpanded(prev => !prev)}>Expand</button>
