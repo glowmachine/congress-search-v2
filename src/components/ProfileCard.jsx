@@ -118,7 +118,7 @@ export default function ProfileCard({ member }) {
                     <a href={`tel:+1-${current.phone}`}>
                         <MdPhone className='hover:text-cyan-500' /></a>
                     <a href={current.contact_form} target='_blank' rel='noopener noreferrer'>
-                        <MdEmail className='hover:text-cyan-500' />
+                        <MdEmail className={`hover:text-cyan-500 ${!current.contact_form ? 'text-red-500' : ''}`} />
                     </a>
                 </div>
             </div>
