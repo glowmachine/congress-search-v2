@@ -251,32 +251,26 @@
     },
     "AS": {
         "name": "American Samoa",
-        "reps": 1,
         "type": "territory"
     },
     "GU": {
         "name": "Guam",
-        "reps": 1,
         "type": "territory"
     },
     "MP": {
         "name": "Northern Mariana Islands",
-        "reps": 1,
         "type": "territory"
     },
     "PR": {
         "name": "Puerto Rico",
-        "reps": 1,
         "type": "territory"
     },
     "VI": {
         "name": "U.S. Virgin Islands",
-        "reps": 1,
         "type": "territory"
     },
     "DC": {
         "name": "District of Columbia",
-        "reps": 1,
         "type": "district"
     }
 }
