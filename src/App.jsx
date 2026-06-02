@@ -7,11 +7,13 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import FilterPanel from './components/FilterPanel';
 import MembersGrid from './components/MembersGrid';
-import membersList from './data/legislators-current.json';
+import filterLegislators from './utils/filterLegislators';
+import useFilters from './hooks/useFilters';
 
 function App() {
   const [isFilterVisible, setIsFilterVisible] = useState(false);
   const legislators = useStoreState(state => state.legislators);
+  const filters = useFilters();
 
   return (
     <div className='h-screen flex flex-col'>
