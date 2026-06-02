@@ -1,10 +1,10 @@
 import React from 'react'
 import ProfileCard from './ProfileCard';
 
-export default function MembersGrid({ membersList }) {
+export default function MembersGrid({ legislators }) {
     return (
         <main className='text-zinc-100 w-full p-1 grid grid-cols-[repeat(auto-fit,minmax(20rem,1fr))] gap-1 content-start overflow-y-auto'>
-            {membersList.map(member => (
+            {legislators.map(member => (
                 <ProfileCard
                     key={member.id.bioguide}
                     member={member}
