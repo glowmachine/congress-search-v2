@@ -1,14 +1,16 @@
 import { useState, useEffect } from 'react';
 import states from '../data/states.json'
+import useFilters from '../hooks/useFilters'
 import membersList from '../data/legislators-current.json';
 
 export default function FilterPanel({ isFilterVisible, setIsFilterVisible }) {
-    const [searchQuery, setSearchQuery] = useState('');
-    const [memberFilter, setMemberFilter] = useState({ sen: true, rep: true });
-    const [stateFilter, setStateFilter] = useState('ALL');
-    const [districtFilter, setDistrictFilter] = useState('ALL');
-    const [partyFilter, setPartyFilter] = useState({ Democrat: true, Republican: true, Independent: true });
-
+    const {
+        searchQuery, setSearchQuery,
+        memberFilter, setMemberFilter,
+        stateFilter, setStateFilter,
+        districtFilter, setDistrictFilter,
+        partyFilter, setPartyFilter,
+    } = useFilters();
     const resetFilters = () => {
         setSearchQuery('');
         setMemberFilter({ sen: true, rep: true });
@@ -42,14 +44,14 @@ export default function FilterPanel({ isFilterVisible, setIsFilterVisible }) {
                     <label className='bg-zinc-200 flex items-center gap-2'>
                         <input type='checkbox' name='party' value='senator'
                             checked={memberFilter.sen}
-                            onChange={e => setMemberFilter(prev => ({ ...prev, sen: !prev.sen }))}
+                            onChange={() => setMemberFilter({ ...memberFilter, sen: !memberFilter.sen })}
                         />
                         Senator
                     </label>
                     <label className='bg-zinc-200 flex items-center gap-2'>
                         <input type='checkbox' name='party' value='Representative'
                             checked={memberFilter.rep}
-                            onChange={e => setMemberFilter(prev => ({ ...prev, rep: !prev.rep }))}
+                            onChange={() => setMemberFilter({ ...memberFilter, rep: !memberFilter.rep })}
                         />
                         Representative
                     </label>
@@ -100,21 +102,27 @@ export default function FilterPanel({ isFilterVisible, setIsFilterVisible }) {
                         <label className='bg-zinc-200 flex items-center gap-2'>
                             <input type='checkbox' name='party'
                                 checked={partyFilter.Democrat}
-                                onChange={e => setPartyFilter(prev => ({ ...prev, Democrat: !prev.Democrat }))}
+                                onChange={() => setPartyFilter({
+                                    ...partyFilter, Democrat: !partyFilter.Democrat
+                                })}
                             />
                             Democrat
                         </label>
                         <label className='bg-zinc-200 flex items-center gap-2'>
                             <input type='checkbox' name='party'
                                 checked={partyFilter.Republican}
-                                onChange={e => setPartyFilter(prev => ({ ...prev, Republican: !prev.Republican }))}
+                                onChange={() => setPartyFilter({
+                                    ...partyFilter, Republican: !partyFilter.Republican
+                                })}
                             />
                             Republican
                         </label>
                         <label className='bg-zinc-200 flex items-center gap-2'>
                             <input type='checkbox' name='party'
                                 checked={partyFilter.Independent}
-                                onChange={e => setPartyFilter(prev => ({ ...prev, Independent: !prev.Independent }))}
+                                onChange={() => setPartyFilter({
+                                    ...partyFilter, Independent: !partyFilter.Independent
+                                })}
                             />
                             Independent
                         </label>
