@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { FaFilter, FaFacebook, FaYoutube, FaTwitter, FaInstagram, FaTiktok, FaWikipediaW } from 'react-icons/fa'
 import { FaArrowRotateLeft } from 'react-icons/fa6';
 import { MdLink, MdPhone, MdEmail } from 'react-icons/md'
-import { states, territories, dc } from '../utils/stateUtils'
+import states from '../data/states.json'
 
 const accentColor = {
     Democrat: 'border-blue-700',
@@ -43,7 +43,7 @@ export default function ProfileCard({ member }) {
                 <div className='flex-1 flex flex-col px-1'>
                     <h1 className='mb-1'>{member.name.first} {member.name.last}, {getAge(member.bio.birthday)}</h1>
                     <h2>{fullTitle[current.type]} ({partyAbbr[current.party]})</h2>
-                    <h2>{{ ...states, ...territories, ...dc }[current.state].name}</h2>
+                    <h2>{states[current.state].name}</h2>
                     <button
                         className='mt-auto ml-auto border rounded hover:bg-cyan-500 hover:bg-cyan-500 px-1'
                         onClick={() => setExpanded(prev => !prev)}>Expand</button>

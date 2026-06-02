@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { states, territories, dc } from '../utils/stateUtils'
+import states from '../data/states.json'
 import membersList from '../data/legislators-current.json';
 
 export default function FilterPanel({ isFilterVisible, setIsFilterVisible }) {
@@ -26,7 +26,6 @@ export default function FilterPanel({ isFilterVisible, setIsFilterVisible }) {
     }
 
     useEffect(() => {
-        // console.log(searchQuery, memberFilter, stateFilter, districtFilter, partyFilter);
     }, [searchQuery, memberFilter, stateFilter, districtFilter, partyFilter]);
 
     return (
@@ -65,17 +64,17 @@ export default function FilterPanel({ isFilterVisible, setIsFilterVisible }) {
                                 <option value='ALL'>All</option>
                             </optgroup>
                             <optgroup label="States">
-                                {Object.entries(states).map(([abbr, state]) => (
+                                {Object.entries(states).filter(([, region]) => region.type === 'state').map(([abbr, state]) => (
                                     <option key={abbr} value={abbr}>{state.name}</option>
                                 ))}
                             </optgroup>
                             <optgroup label='Territories'>
-                                {Object.entries(territories).map(([abbr, territory]) => (
+                                {Object.entries(states).filter(([, region]) => region.type === 'territory').map(([abbr, territory]) => (
                                     <option key={abbr} value={abbr}>{territory.name}</option>
                                 ))}
                             </optgroup>
                             <optgroup label='D.C.'>
-                                {Object.entries(dc).map(([abbr, dc]) => (
+                                {Object.entries(states).filter(([, region]) => region.type === 'district').map(([abbr, dc]) => (
                                     <option key={abbr} value={abbr}>{dc.name}</option>
                                 ))}
                             </optgroup>
