@@ -34,7 +34,7 @@ export default function FilterPanel({ isFilterVisible, setIsFilterVisible }) {
             <form className='grid sm:grid-cols-1 grid-cols-2 items-start gap-1 p-1' onSubmit={e => e.preventDefault()}>
                 <label htmlFor='query' className='hidden'>Search</label>
                 <input className='sm:col-span-1 col-span-2 border px-1'
-                    id='query' type='text' placeholder='Search...' autocomplete='off'
+                    id='query' type='text' placeholder='Search...' autoComplete='off'
                     value={searchQuery}
                     onChange={e => setSearchQuery(e.target.value)}
                 />
@@ -86,7 +86,7 @@ export default function FilterPanel({ isFilterVisible, setIsFilterVisible }) {
                         <select name='district' className='border w-full disabled:border-zinc-300 disabled:text-zinc-300'
                             value={districtFilter}
                             onChange={e => setDistrictFilter(e.target.value)}
-                            disabled={stateFilter === 'ALL' || !states[stateFilter]?.reps}
+                            disabled={stateFilter === 'ALL' || !states[stateFilter]?.reps || !memberFilter['rep']}
                         >
                             <option value='ALL'>All</option>
                             {Array.from({ length: Number(states[stateFilter]?.reps) }, (_, i) => (
