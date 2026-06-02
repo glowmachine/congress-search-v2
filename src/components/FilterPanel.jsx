@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import states from '../data/states.json'
 import useFilters from '../hooks/useFilters'
-import membersList from '../data/legislators-current.json';
 
 export default function FilterPanel({ isFilterVisible, setIsFilterVisible }) {
     const {

@@ -1,7 +1,9 @@
 import { createStore, action } from 'easy-peasy'
-import membersList from '../data/legislators-current.json';
+import legislators from '../data/legislators-current.json';
 
 export default createStore({
+    legislators,
+
     searchQuery: '',
     setSearchQuery: action((state, payload) => {
         state.searchQuery = payload;
