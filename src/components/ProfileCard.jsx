@@ -7,7 +7,7 @@ import states from '../data/states.json'
 const accentColor = {
     Democrat: 'border-blue-700',
     Republican: 'border-red-700',
-    Independent: 'border-zinc-100',
+    Independent: 'border-zinc-400',
 };
 const partyAbbr = {
     Democrat: 'D',
@@ -38,7 +38,7 @@ export default function ProfileCard({ member }) {
     const mostRecentLeadership = member.leadership_roles?.at(-1) ?? null;
     const currentLeader = (mostRecentLeadership?.start && mostRecentLeadership?.end == null) ? mostRecentLeadership : null;
     return (
-        <article className={`relative bg-black rounded border-3 border-b-10 p-1 flex flex-col gap-1 ${accentColor[currentTerm.party] ?? 'border-black'} ${expanded ? 'row-span-2' : ''}`}>
+        <article className={`relative bg-black rounded border-3 border-b-10 p-1 flex flex-col gap-1 ${accentColor[currentTerm.party] ?? 'border-black'} ${expanded ? 'row-span-3' : ''}`}>
             <div name='flagLayer' className='absolute inset-0 h-35'>
                 <img src={`/flags/Flag_of_${states[currentTerm.state].name.replace(/ /g, '_')}.svg`} className='ml-auto h-full' />
                 {/* {`url(https://raw.githubusercontent.com/glowmachine/assets/refs/heads/main/flags/Flag_of_${states[currentTerm.state].name.replace(/ /g, '_')}.svg)`}, */}
