@@ -38,30 +38,38 @@ export default function ProfileCard({ member }) {
     const mostRecentLeadership = member.leadership_roles?.at(-1) ?? null;
     const currentLeader = (mostRecentLeadership?.start && mostRecentLeadership?.end == null) ? mostRecentLeadership : null;
     return (
-        <article className={`bg-cyan-800 rounded border-b-10 p-1 flex flex-col gap-1 ${accentColor[currentTerm.party] ?? 'border-black'} ${expanded ? 'row-span-2' : ''}`}>
-            <div className='flex'>
-                <img src='.png' alt={`portrait of ${member.name.first} ${member.name.last}`} className='bg-zinc-100 aspect-1/1 h-33 object-cover' />
-                <div className='flex-1 flex flex-col px-1'>
-                    <h1 className='mb-1'>{member.name.first} {member.name.last}, {getAge(member.bio.birthday)}</h1>
-                    <h2>{fullTitle[currentTerm.type]} ({partyAbbr[currentTerm.party]})</h2>
-                    <h2>{states[currentTerm.state].name}</h2>
-                    <button
-                        className='mt-auto ml-auto border rounded hover:bg-cyan-500 hover:bg-cyan-500 px-1'
-                        onClick={() => setExpanded(prev => !prev)}>Expand</button>
-                </div>
+        <article className={`relative bg-black rounded border-3 border-b-10 p-1 flex flex-col gap-1 ${accentColor[currentTerm.party] ?? 'border-black'} ${expanded ? 'row-span-2' : ''}`}>
+            <div name='flagLayer' className='absolute inset-0 h-35'>
+                <img src={`/flags/Flag_of_${states[currentTerm.state].name.replace(/ /g, '_')}.svg`} className='ml-auto h-full' />
+                {/* {`url(https://raw.githubusercontent.com/glowmachine/assets/refs/heads/main/flags/Flag_of_${states[currentTerm.state].name.replace(/ /g, '_')}.svg)`}, */}
             </div>
-            <div className={`flex-1 mt-1 border-t-1 border-cyan-500 flex flex-col justify-between ${expanded ? 'block' : 'hidden'}`}>
-                <h2>{currentTerm.district ? `District ${currentTerm.district}` : ''}</h2>
-                <h2>Current Term: {currentTerm.start.slice(0, 4)}-{currentTerm.end.slice(0, 4)}</h2>
-                {currentLeader && <h2>Current Role: {currentLeader.title}</h2>}
-                <div className='mt-auto ml-auto text-3xl sm:text-xl flex justify-end gap-2 border-t-1 border-l-1 p-1'>
-                    <a href={currentTerm.url} target='_blank' rel='noopener noreferrer'>
-                        <MdLink className='hover:text-cyan-500' /></a>
-                    <a href={`tel:+1-${currentTerm.phone}`}>
-                        <MdPhone className='hover:text-cyan-500' /></a>
-                    <a href={currentTerm.contact_form} target='_blank' rel='noopener noreferrer'>
-                        <MdEmail className={`hover:text-cyan-500 ${!currentTerm.contact_form ? 'text-red-500' : ''}`} />
-                    </a>
+            <div name='flagOverlay' className='absolute inset-0 h-35 bg-linear-to-r from-black from-50% via-black/50 via-80% to-black to 90%'>
+            </div>
+            <div name='contentLayer' className='z-10'>
+                <div className='flex'>
+                    <img src='.png' alt={`Portrait of ${member.name.first} ${member.name.last}`} className='bg-zinc-100 aspect-1/1 h-33 object-cover' />
+                    <div className='flex-1 flex flex-col px-1'>
+                        <h1 className='mb-1'>{member.name.first} {member.name.last}, {getAge(member.bio.birthday)}</h1>
+                        <h2>{fullTitle[currentTerm.type]} ({partyAbbr[currentTerm.party]})</h2>
+                        <h2>{states[currentTerm.state].name}</h2>
+                        <button
+                            className='mt-auto ml-auto border rounded hover:bg-cyan-500 hover:bg-cyan-500 px-1'
+                            onClick={() => setExpanded(prev => !prev)}>Expand</button>
+                    </div>
+                </div>
+                <div className={`flex-1 mt-1 border-t-1 border-cyan-500 flex flex-col justify-between ${expanded ? 'block' : 'hidden'}`}>
+                    <h2>{currentTerm.district ? `District ${currentTerm.district}` : ''}</h2>
+                    <h2>Current Term: {currentTerm.start.slice(0, 4)}-{currentTerm.end.slice(0, 4)}</h2>
+                    {currentLeader && <h2>Current Role: {currentLeader.title}</h2>}
+                    <div className='mt-auto ml-auto text-3xl sm:text-xl flex justify-end gap-2 border-t-1 border-l-1 p-1'>
+                        <a href={currentTerm.url} target='_blank' rel='noopener noreferrer'>
+                            <MdLink className='hover:text-cyan-500' /></a>
+                        <a href={`tel:+1-${currentTerm.phone}`}>
+                            <MdPhone className='hover:text-cyan-500' /></a>
+                        <a href={currentTerm.contact_form} target='_blank' rel='noopener noreferrer'>
+                            <MdEmail className={`hover:text-cyan-500 ${!currentTerm.contact_form ? 'text-red-500' : ''}`} />
+                        </a>
+                    </div>
                 </div>
             </div>
         </article >
