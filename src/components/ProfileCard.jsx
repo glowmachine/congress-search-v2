@@ -47,7 +47,10 @@ export default function ProfileCard({ member }) {
             </div>
             <div name='contentLayer' className='z-10'>
                 <div className='flex'>
-                    <img src='.png' alt={`Portrait of ${member.name.first} ${member.name.last}`} className='bg-zinc-100 aspect-1/1 h-33 object-cover' />
+                    <img
+                        src={`https://unitedstates.github.io/images/congress/225x275/${member.id.bioguide}.jpg`}
+                        alt={`Portrait of ${member.name.first} ${member.name.last}`}
+                        className='border aspect-1/1 h-33 object-cover' loading='lazy' />
                     <div className='flex-1 flex flex-col px-1'>
                         <h1 className='mb-1'>{member.name.first} {member.name.last}, {getAge(member.bio.birthday)}</h1>
                         <h2>{fullTitle[currentTerm.type]} ({partyAbbr[currentTerm.party]})</h2>
