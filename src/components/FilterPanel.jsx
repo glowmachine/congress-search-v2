@@ -27,7 +27,8 @@ export default function FilterPanel({ isFilterVisible, setIsFilterVisible }) {
     }
 
     useEffect(() => {
-    }, [searchQuery, memberFilter, stateFilter, districtFilter, partyFilter]);
+        setDistrictFilter('ALL')
+    }, [stateFilter]);
 
     return (
         <aside className={`sm:w-80 bg-zinc-100 text-zinc-500 sm:block overflow-y-auto ${isFilterVisible ? '' : 'hidden'}`}>
