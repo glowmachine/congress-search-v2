@@ -16,7 +16,8 @@ export default function filterLegislators(legislators, filters) {
                 ${member.name.last.toLowerCase()}
                 ${member.name.full_name?.toLowerCase()}
                 ${member.name.middle?.toLowerCase()}
-                ${member.name.suffix?.toLowerCase()}`
+                ${member.name.suffix?.toLowerCase()}
+                ${member.name.nickname?.toLowerCase()}`
                     .includes(filters.searchQuery.toLowerCase());
 
             return (stateMatch &&
