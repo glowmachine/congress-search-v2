@@ -28,7 +28,7 @@ const legislatorModel = {
                 setTimeout(() => {
                     actions.setLegislatorsData(legislatorsJSON);
                     resolve();
-                }, 1000)
+                }, 1)
             );
         }
         catch (err) {
@@ -48,7 +48,7 @@ const legislatorModel = {
         (legislators, socials) => {
             //lookup map
             const socialsMap = Object.fromEntries(
-                socials.map(s => [s.id.bioguide, s])
+                socials.map(s => [s.id.bioguide, s.social])
             );
             return legislators.map(l => ({
                 ...l,
