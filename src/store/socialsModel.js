@@ -1,4 +1,5 @@
 import { action, thunk } from 'easy-peasy';
+// import socialsJSON from '../data/legislators-social-media.json';
 
 const socialsModel = {
     socialsData: [],
@@ -21,6 +22,7 @@ const socialsModel = {
             if (!res.ok) throw new Error(`ResponseCode: ${res.status}`);
             const json = await res.json();
             actions.setSocialsData(json);
+            // actions.setSocialsData(socialsJSON);
         }
         catch (err) {
             actions.setLoadingError(err);

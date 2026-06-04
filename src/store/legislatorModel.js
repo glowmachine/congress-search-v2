@@ -1,5 +1,5 @@
 import { action, thunk, computed } from "easy-peasy";
-import legislatorsJSON from '../data/legislators-current.json';
+// import legislatorsJSON from '../data/legislators-current.json';
 
 const legislatorModel = {
     legislatorsData: [],
@@ -18,18 +18,18 @@ const legislatorModel = {
         actions.setIsLoading(true);
         actions.setLoadingError(null);
         try {
-            // //will throw TypeError: Failed to fetch
-            // const res = await fetch('https://unitedstates.github.io/congress-legislators/legislators-current.json');
-            // //will throw ResponseCode: ###
-            // if (!res.ok) throw new Error(`ResponseCode: ${res.status}`);
-            // const json = await res.json();
-            // actions.setLegislatorsData(json);
-            await new Promise(resolve =>
-                setTimeout(() => {
-                    actions.setLegislatorsData(legislatorsJSON);
-                    resolve();
-                }, 1)
-            );
+            //will throw TypeError: Failed to fetch
+            const res = await fetch('https://unitedstates.github.io/congress-legislators/legislators-current.json');
+            //will throw ResponseCode: ###
+            if (!res.ok) throw new Error(`ResponseCode: ${res.status}`);
+            const json = await res.json();
+            actions.setLegislatorsData(json);
+            // await new Promise(resolve =>
+            //     setTimeout(() => {
+            //         actions.setLegislatorsData(legislatorsJSON);
+            //         resolve();
+            //     }, 1)
+            // );
         }
         catch (err) {
             actions.setLoadingError(err);
