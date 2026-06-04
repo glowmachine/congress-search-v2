@@ -1,11 +1,19 @@
 # Congress Search v2
 A simple directory of members in the current United States senate and house of representatives.
 
+
 ## About
-Built as a remake of an earlier project made with vanilla CSS and JS, this version uses React and Tailwind bundled with Vite. The UI has also been designed to be more similar to resources for entertainment and makes the information approacable for everyday citizens.
+Built as a remake of an [earlier project](https://github.com/glowmachine/congress-search-v1) made with vanilla CSS and JS, this version uses React and Tailwind bundled with Vite.
+
+[Live Demo](https://congress-search-v2.netlify.app/)
 
 ## Screenshots
-*coming soon*
+<a href="./public/screenshot_0.jpg">
+  <img src="./public/screenshot_0.jpg" height="200" />
+</a>
+<a href="./public/screenshot_1.jpg">
+  <img src="./public/screenshot_1.jpg" height="200" />
+</a>
 
 ## Features
 - Browse all current U.S. Senate and House members
@@ -13,14 +21,15 @@ Built as a remake of an earlier project made with vanilla CSS and JS, this versi
 - Find their contact information and links to social media accounts
 
 ## Stack
-- **Library:** React, React Router, react-icons
-- **State:** Context, Easy Peasy (Redux wrapper)
+- **Library:** React, react-icons
+- **State:** Easy Peasy (Redux wrapper)
 - **Styling:** Tailwind CSS
 - **Bundler:** Vite
 
-## Data Source
-- Data is fetched from the [unitedstates/congress-legislators](https://github.com/unitedstates/congress-legislators) repository API
-- Photos are fetched from [unitedstates/images](https://github.com/unitedstates/images) repository API
+## Data Sources
+- Data fetched from the [unitedstates/congress-legislators](https://github.com/unitedstates/congress-legislators)
+- Photos fetched directly from the [unitedstates/images](https://github.com/unitedstates/images)
+- Flags sourced from [nibsbin/us-state-flags-svg](https://github.com/nibsbin/us-state-flags-svg)
 
 ## Getting Started
 ```bash
