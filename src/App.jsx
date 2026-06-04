@@ -13,13 +13,13 @@ import useFilters from './hooks/useFilters';
 export default function App() {
   const [isFilterVisible, setIsFilterVisible] = useState(false);
   const filters = useFilters();
-  const fetchLegislatorsAPI = useStoreActions(action => action.legislators.fetchLegislatorsAPI);
+  const fetchLegislatorsData = useStoreActions(action => action.legislators.fetchLegislatorsData);
   const isLoading = useStoreState(state => state.legislators.isLoading);
   const loadingError = useStoreState(state => state.legislators.loadingError);
-  const legislators = useStoreState(state => state.legislators.legislatorsAPI);
+  const legislatorsData = useStoreState(state => state.legislators.legislatorsData);
 
   useEffect(() => {
-    fetchLegislatorsAPI();
+    fetchLegislatorsData();
   }, []);
 
   return (
@@ -30,7 +30,7 @@ export default function App() {
         {isLoading && <p className='text-4xl mx-1'>Loading...</p>}
         {loadingError && <p className='text-4xl mx-1'>{loadingError.message}</p>}
         {!isLoading && !loadingError &&
-          <MembersGrid legislators={filterLegislators(legislators, filters)} />
+          <MembersGrid legislators={filterLegislators(legislatorsData, filters)} />
         }
       </div>
 
