@@ -4,11 +4,20 @@ import { FaArrowRotateLeft } from 'react-icons/fa6';
 import states from '../data/states.json'
 import ProfileLinks from './ProfileLinks';
 
-const accentColor = {
-    Democrat: 'border-blue-700',
-    Republican: 'border-red-700',
-    Independent: 'border-zinc-400',
-};
+const partyStyles = {
+    Democrat: {
+        hoverbg: 'hover:bg-blue-700',
+        border: 'border-blue-700',
+    },
+    Republican: {
+        hoverbg: 'hover:bg-red-700',
+        border: 'border-red-700',
+    },
+    Independent: {
+        hoverbg: 'hover:bg-zinc-400',
+        border: 'border-zinc-400',
+    },
+}
 const partyAbbr = {
     Democrat: 'D',
     Republican: 'R',
@@ -33,14 +42,14 @@ function getAge(bDayString) {
 }
 
 export default function ProfileCard({ member }) {
-    const [expanded, setExpanded] = useState(true);
+    const [expanded, setExpanded] = useState(false);
     const currentTerm = member.terms.at(-1);
     const previousTerms = member.terms.slice(0, -1).reverse().map(term => ` '${term.start.slice(2, 4)}`);
     const mostRecentLeadership = member.leadership_roles?.at(-1) ?? null;
     const currentLeader = (mostRecentLeadership?.start && mostRecentLeadership?.end == null) ? mostRecentLeadership : null;
 
     return (
-        <article className={`relative bg-black rounded border-3 border-b-10 p-1 ${accentColor[currentTerm.party] ?? 'border-black'} ${expanded ? 'row-span-2' : ''}`}>
+        <article className={`relative bg-black rounded border-3 border-b-10 p-1 ${partyStyles[currentTerm.party].border ?? 'border-black'} ${expanded ? 'row-span-2' : ''}`}>
             <div name='flagLayer' className='absolute z-0 inset-0 h-35'>
                 <img src={`/flags/Flag_of_${states[currentTerm.state].name.replace(/ /g, '_')}.svg`} className='ml-auto h-full' />
             </div>
@@ -52,21 +61,22 @@ export default function ProfileCard({ member }) {
                         src={`https://unitedstates.github.io/images/congress/225x275/${member.id.bioguide}.jpg`}
                         alt={`Portrait of ${member.name.first} ${member.name.last}`}
                         className='border aspect-1/1 h-33 object-cover' loading='lazy' />
-                    <div className='flex-1 flex flex-col px-1'>
-                        <h1 className='mb-1'>{member.name.first} {member.name.last}, {getAge(member.bio.birthday)}</h1>
-                        <h2>{fullTitle[currentTerm.type]} ({partyAbbr[currentTerm.party]})</h2>
-                        <h2>{states[currentTerm.state].name}</h2>
+                    <div className='flex-1 flex flex-col justify-between px-1'>
+                        <ul>
+                            <li className='mb-1'>{member.name.first} {member.name.last}, {getAge(member.bio.birthday)}</li>
+                            <li>{fullTitle[currentTerm.type]} ({partyAbbr[currentTerm.party]})</li>
+                            <li>{states[currentTerm.state].name}</li>
+                            <li>{currentTerm.district ? `District ${currentTerm.district}` : ''}</li>
+                        </ul>
                         <button
-                            className='mt-auto ml-auto border rounded hover:bg-cyan-500 hover:bg-cyan-500 px-1'
+                            className={`mb-1 self-end border rounded ${partyStyles[currentTerm.party].hoverbg ?? 'bg-black'} transition duration-300 px-1`}
                             onClick={() => setExpanded(prev => !prev)}>Expand</button>
                     </div>
                 </div>
-                <div name='cardBottom' className={`flex-1 mt-1 border-t-1 p-1 border-cyan-500 flex flex-col justify-between ${expanded ? 'block' : 'hidden'}`}>
+                <div name='cardBottom' className={`flex-1 mt-2 border-t-1 border-zinc-700 p-1 flex flex-col justify-between ${expanded ? 'block' : 'hidden'}`}>
                     <ul>
                         {currentLeader && <h2 className='italic'>Current Role: {currentLeader.title}</h2>}
                         <li>Current Term: {currentTerm.start.slice(0, 4)}-{currentTerm.end.slice(0, 4)}</li>
-                        <li>{currentTerm.district ? `District ${currentTerm.district}` : ''}</li>
-                        {/* <hr /> */}
                     </ul>
                     <ProfileLinks member={member} />
                 </div>

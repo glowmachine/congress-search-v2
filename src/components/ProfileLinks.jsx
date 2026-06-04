@@ -25,7 +25,7 @@ export default function ProfileLinks({ member }) {
     else if (member.social?.youtube_id) youtube = `https://youtube.com/channel/${member.social.youtube_id}`;
 
     return (
-        <div className='place-self-end text-3xl sm:text-xl flex flex-wrap justify-end gap-2 border-t-1 border-l-1 p-1'>
+        <div className='self-end text-3xl sm:text-xl flex flex-wrap gap-2 border-t-1 border-l-1 p-1'>
             <a href={currentTerm.url} target='_blank' rel='noopener noreferrer'>
                 <MdLink className={enabled} /></a>
             <a href={`tel:+1-${currentTerm.phone}`}>
