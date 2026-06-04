@@ -13,10 +13,10 @@ import useFilters from './hooks/useFilters';
 export default function App() {
   const [isFilterVisible, setIsFilterVisible] = useState(false);
   const filters = useFilters();
-  const fetchLegislatorsAPI = useStoreActions(action => action.fetchLegislatorsAPI);
-  const isLoading = useStoreState(state => state.isLoading);
-  const loadingError = useStoreState(state => state.loadingError);
-  const legislators = useStoreState(state => state.legislatorsAPI);
+  const fetchLegislatorsAPI = useStoreActions(action => action.legislators.fetchLegislatorsAPI);
+  const isLoading = useStoreState(state => state.legislators.isLoading);
+  const loadingError = useStoreState(state => state.legislators.loadingError);
+  const legislators = useStoreState(state => state.legislators.legislatorsAPI);
 
   useEffect(() => {
     fetchLegislatorsAPI();
@@ -25,7 +25,7 @@ export default function App() {
   return (
     <div className='h-screen flex flex-col'>
       <Header setIsFilterVisible={setIsFilterVisible} />
-      <div className='bg-pink-300 flex-1 flex flex-col sm:flex-row sm:overflow-hidden'>
+      <div className='bg-zinc-300 flex-1 flex flex-col sm:flex-row sm:overflow-hidden'>
         <FilterPanel isFilterVisible={isFilterVisible} setIsFilterVisible={setIsFilterVisible} />
         {isLoading && <p className='text-4xl mx-1'>Loading...</p>}
         {loadingError && <p className='text-4xl mx-1'>{loadingError.message}</p>}
