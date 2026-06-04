@@ -1,29 +1,10 @@
 import { createStore, action, thunk } from 'easy-peasy'
 import legislators from '../data/legislators-current.json';
+import filterModel from './filterModel'
 
-export default createStore({
+const store = createStore({
     legislators,
-
-    searchQuery: '',
-    setSearchQuery: action((state, payload) => {
-        state.searchQuery = payload;
-    }),
-    memberFilter: { sen: true, rep: true },
-    setMemberFilter: action((state, payload) => {
-        state.memberFilter = payload;
-    }),
-    stateFilter: 'ALL',
-    setStateFilter: action((state, payload) => {
-        state.stateFilter = payload;
-    }),
-    districtFilter: 'ALL',
-    setDistrictFilter: action((state, payload) => {
-        state.districtFilter = payload;
-    }),
-    partyFilter: { Democrat: true, Republican: true, Independent: true },
-    setPartyFilter: action((state, payload) => {
-        state.partyFilter = payload;
-    }),
+    filters: filterModel,
 
     legislatorsAPI: [],
     isLoading: false,
@@ -42,17 +23,17 @@ export default createStore({
         actions.setLoadingError(null);
         try {
             //will throw TypeError: Failed to fetch
-            const res = await fetch('https://unitedstates.github.io/congress-legislators/legislators-current.json');
+            // const res = await fetch('https://unitedstates.github.io/congress-legislators/legislators-current.json');
             //will throw ResponseCode: ###
-            if (!res.ok) throw new Error(`ResponseCode: ${res.status}`);
-            const json = await res.json();
-            actions.setLegislatorsAPI(json);
-            // await new Promise(resolve =>
-            //     setTimeout(() => {
-            //         actions.setLegislatorsAPI(legislators);
-            //         resolve();
-            //     }, 3000)
-            // );
+            // if (!res.ok) throw new Error(`ResponseCode: ${res.status}`);
+            // const json = await res.json();
+            // actions.setLegislatorsAPI(json);
+            await new Promise(resolve =>
+                setTimeout(() => {
+                    actions.setLegislatorsAPI(legislators);
+                    resolve();
+                }, 1000)
+            );
         }
         catch (err) {
             actions.setLoadingError(err);
@@ -62,3 +43,5 @@ export default createStore({
         }
     }),
 })
+
+export default store;
