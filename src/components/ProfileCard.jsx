@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { FaFilter, FaFacebook, FaYoutube, FaTwitter, FaInstagram, FaTiktok, FaWikipediaW } from 'react-icons/fa'
 import { FaArrowRotateLeft } from 'react-icons/fa6';
-import { MdLink, MdPhone, MdEmail } from 'react-icons/md'
 import states from '../data/states.json'
+import ProfileLinks from './ProfileLinks';
 
 const accentColor = {
     Democrat: 'border-blue-700',
@@ -35,13 +35,14 @@ function getAge(bDayString) {
 export default function ProfileCard({ member }) {
     const [expanded, setExpanded] = useState(false);
     const currentTerm = member.terms.at(-1);
+    const previousTerms = member.terms.slice(0, -1).reverse().map(term => ` '${term.start.slice(2, 4)}`);
     const mostRecentLeadership = member.leadership_roles?.at(-1) ?? null;
     const currentLeader = (mostRecentLeadership?.start && mostRecentLeadership?.end == null) ? mostRecentLeadership : null;
+
     return (
         <article className={`relative bg-black rounded border-3 border-b-10 p-1 ${accentColor[currentTerm.party] ?? 'border-black'} ${expanded ? 'row-span-3' : ''}`}>
             <div name='flagLayer' className='absolute z-0 inset-0 h-35'>
                 <img src={`/flags/Flag_of_${states[currentTerm.state].name.replace(/ /g, '_')}.svg`} className='ml-auto h-full' />
-                {/* {`url(https://raw.githubusercontent.com/glowmachine/assets/refs/heads/main/flags/Flag_of_${states[currentTerm.state].name.replace(/ /g, '_')}.svg)`}, */}
             </div>
             <div name='flagOverlay' className='absolute z-10 inset-0 h-35 bg-linear-to-r from-black from-50% via-black/50 via-80% to-black to 90%'>
             </div>
@@ -61,18 +62,13 @@ export default function ProfileCard({ member }) {
                     </div>
                 </div>
                 <div name='cardBottom' className={`flex-1 mt-1 border-t-1 p-1 border-cyan-500 flex flex-col justify-between ${expanded ? 'block' : 'hidden'}`}>
-                    <h2>{currentTerm.district ? `District ${currentTerm.district}` : ''}</h2>
-                    <h2>Current Term: {currentTerm.start.slice(0, 4)}-{currentTerm.end.slice(0, 4)}</h2>
-                    {currentLeader && <h2>Current Role: {currentLeader.title}</h2>}
-                    <div className='mt-auto ml-auto text-3xl sm:text-xl flex justify-end gap-2 border-t-1 border-l-1 p-1'>
-                        <a href={currentTerm.url} target='_blank' rel='noopener noreferrer'>
-                            <MdLink className='hover:text-cyan-500' /></a>
-                        <a href={`tel:+1-${currentTerm.phone}`}>
-                            <MdPhone className='hover:text-cyan-500' /></a>
-                        <a href={currentTerm.contact_form} target='_blank' rel='noopener noreferrer'>
-                            <MdEmail className={`hover:text-cyan-500 ${!currentTerm.contact_form ? 'text-red-500' : ''}`} />
-                        </a>
-                    </div>
+                    <ul>
+                        {currentLeader && <h2 className='italic'>Current Role: {currentLeader.title}</h2>}
+                        <li>Current Term: {currentTerm.start.slice(0, 4)}-{currentTerm.end.slice(0, 4)}</li>
+                        <li>{currentTerm.district ? `District ${currentTerm.district}` : ''}</li>
+                        <hr />
+                        <ProfileLinks member={member} />
+                    </ul>
                 </div>
             </div>
         </article>
