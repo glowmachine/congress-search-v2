@@ -51,7 +51,7 @@ export default function ProfileCard({ member }) {
     return (
         <article className={`relative bg-black rounded border-3 border-b-10 p-1 ${partyStyles[currentTerm.party].border ?? 'border-black'} ${expanded ? 'row-span-2' : ''}`}>
             <div name='flagLayer' className='absolute z-0 inset-0 h-35'>
-                <img src={`/flags/Flag_of_${states[currentTerm.state].name.replace(/ /g, '_')}.svg`} className='ml-auto h-full' />
+                <img src={`https://raw.githubusercontent.com/glowmachine/assets/refs/heads/main/flags/Flag_of_${states[currentTerm.state].name.replace(/ /g, '_')}.svg`} className='ml-auto h-full' />
             </div>
             <div name='flagOverlay' className='absolute z-10 inset-0 h-35 bg-linear-to-r from-black from-50% via-black/50 via-80% to-black to 90%'>
             </div>
