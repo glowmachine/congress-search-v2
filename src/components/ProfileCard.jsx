@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { FaFilter, FaFacebook, FaYoutube, FaTwitter, FaInstagram, FaTiktok, FaWikipediaW } from 'react-icons/fa'
+import { FaFilter } from 'react-icons/fa'
 import { FaArrowRotateLeft } from 'react-icons/fa6';
 import states from '../data/states.json'
 import ProfileLinks from './ProfileLinks';
@@ -33,14 +33,14 @@ function getAge(bDayString) {
 }
 
 export default function ProfileCard({ member }) {
-    const [expanded, setExpanded] = useState(false);
+    const [expanded, setExpanded] = useState(true);
     const currentTerm = member.terms.at(-1);
     const previousTerms = member.terms.slice(0, -1).reverse().map(term => ` '${term.start.slice(2, 4)}`);
     const mostRecentLeadership = member.leadership_roles?.at(-1) ?? null;
     const currentLeader = (mostRecentLeadership?.start && mostRecentLeadership?.end == null) ? mostRecentLeadership : null;
 
     return (
-        <article className={`relative bg-black rounded border-3 border-b-10 p-1 ${accentColor[currentTerm.party] ?? 'border-black'} ${expanded ? 'row-span-3' : ''}`}>
+        <article className={`relative bg-black rounded border-3 border-b-10 p-1 ${accentColor[currentTerm.party] ?? 'border-black'} ${expanded ? 'row-span-2' : ''}`}>
             <div name='flagLayer' className='absolute z-0 inset-0 h-35'>
                 <img src={`/flags/Flag_of_${states[currentTerm.state].name.replace(/ /g, '_')}.svg`} className='ml-auto h-full' />
             </div>
@@ -66,9 +66,9 @@ export default function ProfileCard({ member }) {
                         {currentLeader && <h2 className='italic'>Current Role: {currentLeader.title}</h2>}
                         <li>Current Term: {currentTerm.start.slice(0, 4)}-{currentTerm.end.slice(0, 4)}</li>
                         <li>{currentTerm.district ? `District ${currentTerm.district}` : ''}</li>
-                        <hr />
-                        <ProfileLinks member={member} />
+                        {/* <hr /> */}
                     </ul>
+                    <ProfileLinks member={member} />
                 </div>
             </div>
         </article>
