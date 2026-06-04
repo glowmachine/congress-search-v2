@@ -1,4 +1,4 @@
-import { action, thunk } from "easy-peasy";
+import { action, thunk, computed } from "easy-peasy";
 import legislatorsJSON from '../data/legislators-current.json';
 
 const legislatorModel = {
@@ -38,6 +38,24 @@ const legislatorModel = {
             actions.setIsLoading(false);
         }
     }),
+    enrichedLegislatorsData: computed(
+        //select data from legislatorModel and socialsModel
+        [
+            state => state.legislatorsData,
+            (state, storeState) => storeState.socials.socialsData,
+        ],
+        //transform data, args in above select order
+        (legislators, socials) => {
+            //lookup map
+            const socialsMap = Object.fromEntries(
+                socials.map(s => [s.id.bioguide, s])
+            );
+            return legislators.map(l => ({
+                ...l,
+                social: socialsMap[l.id.bioguide] ?? null,
+            }));
+        }
+    ),
 }
 
 export default legislatorModel;

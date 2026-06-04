@@ -14,12 +14,16 @@ export default function App() {
   const [isFilterVisible, setIsFilterVisible] = useState(false);
   const filters = useFilters();
   const fetchLegislatorsData = useStoreActions(action => action.legislators.fetchLegislatorsData);
+  const fetchSocialsData = useStoreActions(action => action.socials.fetchSocialsData);
   const isLoading = useStoreState(state => state.legislators.isLoading);
   const loadingError = useStoreState(state => state.legislators.loadingError);
-  const legislatorsData = useStoreState(state => state.legislators.legislatorsData);
+
+  // const legislatorsData = useStoreState(state => state.legislators.legislatorsData);
+  const legislatorsData = useStoreState(state => state.legislators.enrichedLegislatorsData);
 
   useEffect(() => {
     fetchLegislatorsData();
+    fetchSocialsData();
   }, []);
 
   return (
